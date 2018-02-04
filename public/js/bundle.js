@@ -10385,6 +10385,7 @@ var k;
 var val;
 var rightval;
 var subAudio;
+var rightAudio;
 var revealing;
 var mute;
 
@@ -10401,6 +10402,7 @@ $(document).ready(function () {
         k = -1;
         val = [];
         rightval = [];
+        rightAudio = [];
         subAudio = [];
         revealing = false;
         mute = false;
@@ -10423,6 +10425,9 @@ $(document).ready(function () {
             val.push(0);
             rightval.push(instrumentsList[Math.floor(Math.random() * instruments)]);
             subAudio.push(document.createElement('audio'));
+            rightAudio.push(document.createElement('audio'));
+            rightAudio[i].setAttribute('src', `/music/${rightval[i]}.wav`);
+            subAudio[i].setAttribute('src', `/music/${instrumentsList[val[i]]}.wav`);
 
             $('#squareZone').append(`<div id='square${i}' class='square'> </canvas>`);
             resizeAll();
@@ -10433,6 +10438,7 @@ $(document).ready(function () {
                 val[i] = (val[i] + 1) % instruments;
 
                 subAudio[i].setAttribute('src', `/music/${instrumentsList[val[i]]}.wav`);
+                
                 subAudio[i].currentTime = 0;
                 subAudio[i].play();
 
@@ -10466,9 +10472,15 @@ $(document).ready(function () {
             k = 0;
             score = 0;
         }
-
-        subAudio[k].currentTime = 0;
-        subAudio[k].play();
+        
+        if(!revealing) {
+            subAudio[k].currentTime = 0;
+            subAudio[k].play();
+        } else {
+            rightAudio[k].currentTime = 0;
+            rightAudio[k].play();
+        }
+        
         
         $('#round').html(++round);
 
@@ -10538,7 +10550,7 @@ $(document).ready(function () {
         for (let i = 0; i < sqNum; i++) {
             $('#square' + i).addClass('revealing-square');
             $('#square' + i).removeClass('tocc').removeClass('right');
-            subAudio[i].setAttribute('src', `/music/${rightval[i]}.wav`);
+            //subAudio[i].setAttribute('src', `/music/${rightval[i]}.wav`);
         }
     });
     $('#back-reveal').click(function () {
@@ -10547,7 +10559,7 @@ $(document).ready(function () {
         revealing = false;
         
         for (let i = 0; i < sqNum; i++) {
-            subAudio[i].setAttribute('src', `/music/${instrumentsList[val[i]]}.wav`);
+            //subAudio[i].setAttribute('src', `/music/${instrumentsList[val[i]]}.wav`);
             $('#square' + i).removeClass('revealing-square');
         }
     });
