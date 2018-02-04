@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Metro Norm</title>
+
+
+    <% include head_stuff.ejs %>
+
+
+</head>
+
+<body>
+
+
+    <div id='squareZone' class='row'></div>
+
+
+    </div>
+    <div id='middle'>
+        <h1 id='round'>0</h1>
+        <h6 id='data'>▷❚❚</h6>
+        <a name="" id="start" class="btn btn-light btnpp">🕨 Start</a>
+        <a name="" id="play" class="btn btn-light btnpp" style="display:none;">▷ Play </a>
+        <a name="" id="pause" class="btn btn-light btnpp" style="display:none;">❚❚ Pause</a>
+        <a name="" id="replay" class="btn btn-light btnpp " style="display:none;">🖏 Too Easy ?</a>
+        <a name="" id="reveal" class="btn btn-light btnpp" style="display:none;">🕨 Listen Again ?</a>
+        <a name="" id="back-reveal" class="btn btn-success btnpp" style="display:none;">🖏 Back to play</a>
+    </div>
+    <div id='option'>
+        <a name="" id="howto" class="btn btn-light btno">❔ How to Play</a>
+        <a name="" id="mute" class="btn btn-light btno">🗙 Mute Wood</a>
+
+    </div>
+
+
+    <div class="vignette"></div>
+    <script>
+        var sqNum = <%- JSON.stringify(sqNum) %>;
+        var instruments = <%- JSON.stringify(instruments) %>;
+        var tocctime = <%- JSON.stringify(tocctime) %>;
+    </script>
+    <script src="/js/bundle.js"></script>
+</body>
+
+</html>
