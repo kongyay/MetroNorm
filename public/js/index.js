@@ -6,7 +6,7 @@ var $ = require('jquery');
 // var sqNum = 2;
 // var instruments = 3;
 // var tocctime = 1000;
-var maxInstruments = 25;
+var maxInstruments = 21;
 // Var
 var round;
 var score;
