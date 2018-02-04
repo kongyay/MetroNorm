@@ -12,6 +12,7 @@ var round;
 var score;
 var width;
 var height;
+var instrumentsList;
 var toccEvent;
 var k;
 var val;
@@ -29,6 +30,7 @@ $(document).ready(function () {
         score = 0;
         width = 100 / sqNum;
         height = 10;
+        instrumentsList = [];
         k = -1;
         val = [];
         rightval = [];
@@ -44,9 +46,15 @@ $(document).ready(function () {
         $('#round').html('Press Start to listen...');
         $('#data').html(`${Math.round(1000/tocctime*100)/100} BPS | ${instruments} Instruments | ${sqNum} Loop Beats`);
         $('#squareZone').html('');
+
+        for(var j=0;j<maxInstruments;j++) {
+            instrumentsList.push(j);
+        }
+        instrumentsList = shuffle(instrumentsList);
+        console.log(instrumentsList);
         for (let i = 0; i < sqNum; i++) {
             val.push(0);
-            rightval.push(Math.floor(Math.random() * instruments));
+            rightval.push(instrumentsList[Math.floor(Math.random() * instruments)]);
             subAudio.push(document.createElement('audio'));
 
             $('#squareZone').append(`<div id='square${i}' class='square'> </canvas>`);
@@ -57,16 +65,18 @@ $(document).ready(function () {
                 if (revealing) return;
                 val[i] = (val[i] + 1) % instruments;
 
-                subAudio[i].setAttribute('src', `/music/${val[i]}.wav`);
+                subAudio[i].setAttribute('src', `/music/${instrumentsList[val[i]]}.wav`);
                 subAudio[i].currentTime = 0;
                 subAudio[i].play();
-                console.log(val[i]);
+
                 var height = $(window).height() / instruments * (val[i] + 1);
                 $(this).css('height', height + 'px');
 
             });
 
         }
+
+        console.log(rightval);
     }
 
 
@@ -100,10 +110,9 @@ $(document).ready(function () {
             return;
         }
 
-        if (val[k] == rightval[k]) {
+        if (instrumentsList[val[k]] == rightval[k]) {
 
             score++;
-            console.log('Score' + score);
             if (score == sqNum) {
                 $('#pause').click();
                 $('#round').html('Congrats, You won within: ' + round + ' beats');
@@ -207,6 +216,25 @@ $(document).ready(function () {
             $('#square' + i).css('height', height + 'px');
         }
     }
+
+    function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+      
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+      
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+      
+          // And swap it with the current element.
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
+      
+        return array;
+      }
 });
 
 
