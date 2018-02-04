@@ -10418,7 +10418,7 @@ $(document).ready(function () {
             instrumentsList.push(j);
         }
         instrumentsList = shuffle(instrumentsList);
-        console.log(instrumentsList);
+        
         for (let i = 0; i < sqNum; i++) {
             val.push(0);
             rightval.push(instrumentsList[Math.floor(Math.random() * instruments)]);
@@ -10443,7 +10443,7 @@ $(document).ready(function () {
 
         }
 
-        console.log(rightval);
+       
     }
 
 
