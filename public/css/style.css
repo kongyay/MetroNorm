@@ -77,6 +77,19 @@ h6 {
   -webkit-transition: height 0.5s; /* Safari */
   transition: height 0.5s;
 }
+.revealing-square {
+  background: rgb(255,126,125); /* Old browsers */
+  background: -moz-linear-gradient(top, rgba(255, 150, 150, 0.2) 0%, rgba(14,14,14,0.5) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgba(255, 150, 150, 0.2) 0%,rgba(14,14,14,0.5) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(255, 150, 150, 0.5) 0%,rgba(14,14,14,0.5) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=0 ); /* IE6-9 */
+  -webkit-transition: background 0.5s; /* Safari */
+  transition: background 0.5s;
+}
+.revealing-square.tocc {
+  border-style: dotted;
+  border-color: yellow;
+}
 
 .tocc {
   border-style: dashed;

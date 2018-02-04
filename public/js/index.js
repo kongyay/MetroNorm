@@ -106,7 +106,7 @@ $(document).ready(function () {
         $('#round').html(++round);
 
         if (revealing) {
-            $('#square' + k).addClass('right');
+            $('#square' + k).addClass('tocc');
             return;
         }
 
@@ -169,8 +169,8 @@ $(document).ready(function () {
         revealing = true;
         k = -1;
         for (let i = 0; i < sqNum; i++) {
-            $('#square' + i).height(1);
-            $('#square' + i).removeClass('tocc');
+            $('#square' + i).addClass('revealing-square');
+            $('#square' + i).removeClass('tocc').removeClass('right');
             subAudio[i].setAttribute('src', `/music/${rightval[i]}.wav`);
         }
     });
@@ -178,9 +178,10 @@ $(document).ready(function () {
         $('#reveal').show();
         $(this).hide();
         revealing = false;
-        resizeAll();
+        
         for (let i = 0; i < sqNum; i++) {
             subAudio[i].setAttribute('src', `/music/${instrumentsList[val[i]]}.wav`);
+            $('#square' + i).removeClass('revealing-square');
         }
     });
 
