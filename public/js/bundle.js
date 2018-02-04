@@ -10547,7 +10547,7 @@ $(document).ready(function () {
         revealing = false;
         resizeAll();
         for (let i = 0; i < sqNum; i++) {
-            subAudio[i].setAttribute('src', `/music/${val[i]}.wav`);
+            subAudio[i].setAttribute('src', `/music/${instrumentsList[val[i]]}.wav`);
         }
     });
 
