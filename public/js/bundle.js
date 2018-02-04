@@ -10373,6 +10373,7 @@ var $ = require('jquery');
 // var sqNum = 2;
 // var instruments = 3;
 // var tocctime = 1000;
+var maxInstruments = 25;
 // Var
 var round;
 var score;
@@ -10395,15 +10396,14 @@ $(document).ready(function () {
         score = 0;
         width = 100 / sqNum;
         height = 10;
-        toccEvent;
         k = -1;
         val = [];
         rightval = [];
         subAudio = [];
         revealing = false;
         mute = false;
-        if (instruments > 10 || instruments < 1) {
-            $('#round').html('Instrument value has to be 1-10');
+        if (instruments > maxInstruments || instruments < 1) {
+            $('#round').html('Instrument value has to be 1-'+maxInstruments);
             $('#start').hide();
             return;
         }
@@ -10425,6 +10425,7 @@ $(document).ready(function () {
                 val[i] = (val[i] + 1) % instruments;
 
                 subAudio[i].setAttribute('src', `/music/${val[i]}.wav`);
+                subAudio[i].currentTime = 0;
                 subAudio[i].play();
                 console.log(val[i]);
                 var height = $(window).height() / instruments * (val[i] + 1);
@@ -10456,7 +10457,9 @@ $(document).ready(function () {
             score = 0;
         }
 
+        subAudio[k].currentTime = 0;
         subAudio[k].play();
+        
         $('#round').html(++round);
 
         if (revealing) {
@@ -10508,12 +10511,11 @@ $(document).ready(function () {
 
     $('#replay').click(function () {
         tocctime = (tocctime>100)? tocctime-50:tocctime;
-        instruments = (instruments<10)? instruments+1:10;
+        instruments = (instruments<maxInstruments)? instruments+1:maxInstruments;
         sqNum = (sqNum<100)? sqNum+1:100;
 
         setup();
         $('#start').show();
-        $('#reveal').show();
         $('#replay').hide();
 
     });
@@ -10550,7 +10552,7 @@ $(document).ready(function () {
     });
 
     var audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', '/music/woodblock.wav');
+    audioElement.setAttribute('src', '/music/woodblock.ogg');
 
     audioElement.addEventListener('ended', function () {
         //this.play();
